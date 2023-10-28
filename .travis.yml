@@ -4,13 +4,13 @@ services:
   - docker
 
 after_success:
-  - docker build -t gellert/complex-client ./client-vite
   - docker build -t gellert/complex-nginx ./nginx
+  - docker build -t gellert/complex-client ./client-vite
   - docker build -t gellert/complex-server ./server
   - docker build -t gellert/complex-worker ./worker
   - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD" docker.io
   - docker images
-  - docker push gellert/complex-client:latest
   - docker push gellert/complex-nginx:latest
-  - docker push gellert/complex-worker:latest
+  - docker push gellert/complex-client:latest
   - docker push gellert/complex-server:latest
+  - docker push gellert/complex-worker:latest
