@@ -1,0 +1,26 @@
+name: Deploy MultiDocker
+on:
+  push:
+    branches:
+      - master # check your repo, your default branch might be master!
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - run: docker build -t complex-nginx ./nginx
+      - run: docker build -t complex-client ./client-vite
+      - run: docker build -t complex-server ./server
+      - run: docker build -t complex-worker ./worker
+
+      - run: docker tag complex-nginx ${{ secrets.DOCKER_ID }}/complex-nginx:complex-nginx
+      - run: docker tag complex-client ${{ secrets.DOCKER_ID }}/complex-client:complex-client
+      - run: docker tag complex-server ${{ secrets.DOCKER_ID }}/complex-server:complex-server
+      - run: docker tag complex-worker ${{ secrets.DOCKER_ID }}/complex-worker:complex-worker
+      - run: docker push ${{ secrets.DOCKER_ID }}/complex-worker:complex-worker
+      - run: docker push ${{ secrets.DOCKER_ID }}/complex-server:complex-server
+      - run: docker push ${{ secrets.DOCKER_ID }}/complex-nginx:complex-nginx
+      - run: docker push ${{ secrets.DOCKER_ID }}/complex-client:complex-client
