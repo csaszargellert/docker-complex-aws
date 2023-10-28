@@ -17,5 +17,5 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
   - docker push gellert/complex-client
   - docker push gellert/complex-nginx
-  - docker push gellert/complex-server
   - docker push gellert/complex-worker
+  - docker push gellert/complex-server
