@@ -15,5 +15,5 @@ after_success:
   - docker tag complex-worker "$DOCKER_ID"/complex-worker:complex-worker
   - docker push "$DOCKER_ID"/complex-worker:complex-worker
   - docker push "$DOCKER_ID"/complex-server:complex-server
-  - docker push "$DOCKER_ID"/complex-client:complex-client
   - docker push "$DOCKER_ID"/complex-nginx:complex-nginx
+  - docker push "$DOCKER_ID"/complex-client:complex-client
