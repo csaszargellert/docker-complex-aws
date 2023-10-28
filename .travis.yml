@@ -13,8 +13,9 @@ after_success:
   - docker build -t gellert/complex-client ./client
   - docker build -t gellert/complex-nginx ./nginx
   - docker build -t gellert/complex-server ./server
-  - docker build -t gellert/worker ./worker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin docker.io
+  - docker build -t gellert/complex-worker ./worker
+  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD" docker.io
+  - docker images
   - docker push gellert/complex-client
   - docker push gellert/complex-nginx
   - docker push gellert/complex-worker
